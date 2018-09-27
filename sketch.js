@@ -59,14 +59,12 @@ class shooter_class {
     this.y = Y;
     this.w = W;
     this.h = H;
-    this.col = function (RGB_R,RGB_G,RGB_B) {
-      this.r = RGB_R;
-      this.g = RGB_G;
-      this.b = RGB_B;
-    };
+    this.r = RGB_R;
+    this.g = RGB_G;
+    this.b = RGB_B;
   }
   show() {
-    fill(this.col.r, this.col.g, this.col.b);
+    fill(this.r, this.g, this.b);
     rect(this.x, this.y, this.w, this.h);
   }
 }
