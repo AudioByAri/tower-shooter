@@ -5,10 +5,10 @@ var tower_basic = [];
 function setup() {
   createCanvas(600,500);
 
-  // var leftBorder = line(0,0,0,height); //left line
-  // var rightBorder = line(width,height,width,0);//right line
-  // var topBorder = line(0,height,width,height);//top line
-  // var bottomBorder = line(0,0,width,0) //bottom line
+  var leftBorder = line(0,0,0,height); //left line
+  var rightBorder = line(width,height,width,0);//right line
+  var topBorder = line(0,height,width,height);//top line
+  var bottomBorder = line(0,0,width,0) //bottom line
 
   let playerStartX = 100,
       playerStartY = 300,
@@ -36,7 +36,14 @@ function setup() {
 
 }
 
-
+function collide(a,b) {
+  try{
+    return collideRectCircle(a.x, a.y, a.w, a.h, b.x, b.y, b.w, b.h);
+  }catch(error){
+    console.error("ERROR: collide" + error);
+    return false;
+  }
+}
 
 
 
@@ -54,14 +61,11 @@ function keyPressed () {
     }
   }
 
-  // for(let i = 0; i < player.length; i++) {
-
-  //   let eliminate = 0;
-  //   if (tower_basic[i].kill(enter)) {
-  //     eliminate = 1;
-  //   }
-
-  // }
+  for(let i = 0; i < tower_basic.length; i++) {
+    if (keyCode === ENTER) {
+      tower_basic.splice(i,1);
+    }
+  }
 }
 
 
@@ -71,7 +75,9 @@ function keyPressed () {
 function draw() {
 
   background(0);
-
+  if(tower_basic.length >0){
+    print(collide(player[0],tower_basic[0]));
+  }
   for(let i = 0; i < player.length; i++) {
     player[i].show();
   }
